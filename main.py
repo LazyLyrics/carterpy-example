@@ -25,6 +25,7 @@ load_dotenv()
 api_key = os.getenv("CARTER_API_KEY")
 player_id = os.getenv("PLAYER_ID")
 char_name = os.getenv("CHAR_NAME")
+opener_needed = os.getenv("OPENER")
 
 # Check if API key and player_id are set
 if not api_key:
@@ -35,17 +36,22 @@ if not player_id:
         player_id = None
 if not char_name:
     char_name = input("Please enter your character name: ")
-opener_needed = input("Do you want a conversation opener? (yes/no): ").lower()
+if not opener_needed:
+    yesorno = input("Do you want a conversation opener? (yes/no): ")
+    if yesorno == "yes":
+        opener_needed = True
+    else:
+        opener_needed = False
 
 # Initialize Carter
 carter = Carter(api_key)
 
 print()
-print(colored(f"Welcome to the Carter API example! Use /help for guidance. You can set variables using the .env_example provided and renaming it to '.env'", "magenta"))
+print(colored(f"Welcome to this carter-py example! Use /help for guidance. You can set variables using the .env_example provided and renaming it to '.env'", "magenta"))
 print()
 
 # Ask if the user wants a conversation opener
-if opener_needed == "yes":
+if opener_needed:
     interaction = carter.opener(player_id)
     print(colored(f"{char_name}: {interaction.output_text}", "green"))
 
@@ -76,9 +82,17 @@ while True:
         avg_time = sum([interaction.time_taken for interaction in last_5]) / len(last_5)
         print(f"Average response time (last 5 interactions): {avg_time} ms")
 
+    elif user_input == "/personalise":
+        text = input("Enter the text you want to personalise: ")
+        interaction = carter.personalise(text)
+        if interaction.ok:
+            print(colored(f"{char_name}: " + interaction.output_text, "green"))
+
     elif user_input[0] != "/":
         interaction = carter.say(user_input, player_id)
         if interaction.ok:
             print(colored(f"{char_name}: " + interaction.output_text, "green"))
         else:
             print(colored(f"Error [{interaction.status_code}]: " + interaction.status_message, "red"))
+    else:
+        print(colored("Invalid command. Use /help for guidance.", "red"))

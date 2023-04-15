@@ -19,6 +19,7 @@ The script will run and ask you for any necessary variables not specified in the
 CARTERPY_API_KEY=your-api-key
 PLAYER_ID=your-player-id
 PLAYER_NAME=your-player-name
+OPENER=True
 ```
 
 ## Carter
