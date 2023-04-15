@@ -33,3 +33,5 @@ OPENER=True
 [carter-py on GitHub](https://github.com/LazyLyrics/carterpy)
 
 [This example on GitHub](https://github.com/LazyLyrics/carterpy-example)
+
+[Asynchronous example](https://github.com/LazyLyrics/carterpy-async-example)
