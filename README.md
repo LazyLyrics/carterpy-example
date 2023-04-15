@@ -13,6 +13,14 @@
 
 The script will run and ask you for any necessary variables not specified in the `.env` file. If a player ID is not specified, `carterpy` will use a random one, so be sure to provide one if you want your character to recognise you.
 
+## example .env file
+
+```env
+CARTERPY_API_KEY=your-api-key
+PLAYER_ID=your-player-id
+PLAYER_NAME=your-player-name
+```
+
 ## Carter
 
 [Get your API key](https://www.carterlabs.ai/)

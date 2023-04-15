@@ -35,22 +35,26 @@ if not player_id:
         player_id = None
 if not char_name:
     char_name = input("Please enter your character name: ")
+opener_needed = input("Do you want a conversation opener? (yes/no): ").lower()
 
 # Initialize Carter
 carter = Carter(api_key)
 
+print()
+print(colored(f"Welcome to the Carter API example! Use /help for guidance. You can set variables using the .env_example provided and renaming it to '.env'", "magenta"))
+print()
 
 # Ask if the user wants a conversation opener
-opener_needed = input("Do you want a conversation opener? (yes/no): ").lower()
 if opener_needed == "yes":
     interaction = carter.opener(player_id)
-    print(colored(interaction.output_text, "green"))
+    print(colored(f"{char_name}: {interaction.output_text}", "green"))
 
 # Main loop
 while True:
     user_input = input("You: ")
 
     if user_input == "/help":
+        print("Available commands:")
         print("/quit - Quit the program")
         print("/history - Show the history of interactions")
         print("/avg_time - Show the average response time over the session")
